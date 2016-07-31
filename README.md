@@ -1,4 +1,4 @@
-# Arvore de Refutação
+# Árvore de Refutação
 
 Árvore de Refutação é um método para verificar a validade de um argumento, análogo à demonstração por absurdo.Para testarmos a validade de um argumento construímos uma lista de fórmulas consistindo de suas premissas A1, A2 , A3 ,... ,An e a negação da sua conclusão ~B que formam a RAIZ DA ÁRVORE. A árvore continua abaixo com a construção de seus RAMOS por aplicações de regras, que serão especificadas abaixo, e gerando novas linhas na árvore. A árvore termina quando as fórmulas de seus ramos são: variáveis proposicionais, negações de variáveis proposicionais, ou quando encontrarmos em todos os ramos uma fórmula F.
 
