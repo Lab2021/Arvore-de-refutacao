@@ -47,10 +47,8 @@ verificaexp = function(x){
          console.log("ADD ELE")
       }else if(x.value == "AND"){
          console.log("ADD AND")
-         for(var i=0;i<x.left.length;i++){
-            console.log(i);
-            verificaexp(x.left[i])
-         }
+         verificaexp(x.left)
+         verificaexp(x.right)
       }else if(x.value == "OU"){
          console.log("OUU")
          if(!x.hasOwnProperty('flag')){
@@ -61,31 +59,61 @@ verificaexp = function(x){
             verificaexp(x.right);
             cont--;
          }
-
       }else if(x.value == "SE"){
          console.log("SE")
          if(!x.hasOwnProperty('flag')){
          x.flag = 1;
-         verificaexp(x.left);
+         verificaexp({value:"NOT", left:x.left});
             cont++;
          }else{
             verificaexp(x.right);
             cont--;
          }
       }else if(x.value == "SSS"){
-         cont++;
-      }else if(x.value == "NSSSS"){
-         cont++;
-      }else if(x.value == "NSE"){
-         for(var i=0;i<x.left.length;i++){
-            verificaexp(x.left[i])
+         if(!x.hasOwnProperty('flag')){
+         x.flag = 1;
+         verificaexp(x.left);
+            cont++;
+         }else{
+            verificaexp([{value:"NOT", left:x.right[0]},{value:"NOT", left:x.right[1]}]);
+            cont--;
          }
-      }else if(x.value == "NAND"){
-         cont++;
-      }else if(x.value == "NOU"){
-         for(var i=0;i<x.left.length;i++){
-            verificaexp(x.left[i])
-         }
+      }else if(x.value == "NOT"){
+         //NOT
+         if(x.left.value == "ELE"){
+            console.log("ADD NOTELE")
+              lista.push('~'+x.left.left);
+           }else if(x.left.value == "AND"){
+              console.log("ADD NAND")
+              if(!x.hasOwnProperty('flag')){
+              x.flag = 1;
+              verificaexp({value:"NOT", left:x.left.left});
+                 cont++;
+              }else{
+                 verificaexp({value:"NOT", left:x.left.right});
+                 cont--;
+              }
+           }else if(x.left.value == "OU"){
+              console.log("NOUU")
+              verificaexp({value:"NOT", left:x.left.left})
+              verificaexp({value:"NOT", left:x.left.right})
+           }else if(x.left.value == "SE"){
+              console.log("NSE")
+              verificaexp(x.left.left);
+              verificaexp({value:"NOT", left:x.left.right});
+           }else if(x.left.value == "SSS"){
+             if(!x.hasOwnProperty('flag')){
+             x.flag = 1;
+             verificaexp([x.left.right[0],{value:"NOT", left:x.left.right[1]}]);
+                cont++;
+             }else{
+                verificaexp([{value:"NOT", left:x.left.right[0]},x.left.right[1]]);
+                cont--;
+             }
+          }else if (x.left.value == "NOT"){
+             console.log("EU AQUI ")
+             verificaexp(x.left.left);
+          }
       }else{
          if(x.hasOwnProperty('length')){
             for(y of x){
@@ -107,8 +135,6 @@ verificaexp = function(x){
 
 //Função para aplicar o Parser na Entrada
 function exec (input) {
-   a = input.split(':-')
-   input = a[0] + ':-~(' +a[1] + ')'
     return parser.parse(input.replace('~~',''));
 }
 
@@ -123,9 +149,9 @@ vet = input.split(':-');
 
 
 p = vet[0]; // Vetor das premissas
-c = vet[1]; // Vetor da conclusão
+c = '{"value":"NOT", "left":'+vet[1]+'}'; // Vetor da conclusão
 cont = 0;
-
+console.log(c);
 
 // Essa função cria um vetor e aloca todos os termos nele
 //onde é feito a verificação de validação de cada ramo.
@@ -160,6 +186,6 @@ cont = 0;
 
 console.log(cont);
 //Mostra Saída
-document.getElementById('demo').innerHTML = input; // Arvore gerada pelo parser
+//document.getElementById('demo').innerHTML = input; // Arvore gerada pelo parser
 document.getElementById('saida').innerHTML = p?"Verdade":"Falso"; // Saida para o usuário
 }

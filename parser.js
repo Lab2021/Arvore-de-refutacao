@@ -91,13 +91,13 @@ case 3: this.$ = $$[$0]
 break;
 case 4: this.$ = $$[$0-2]+','+$$[$0]
 break;
-case 5: this.$ =  '{"value":"OU", "right":['+$$[$0]+'] , "left":['+$$[$0-2]+'] }'
+case 5: this.$ =  '{"value":"OU", "right":'+$$[$0]+' , "left":'+$$[$0-2]+' }'
 break;
-case 6: this.$ =  '{"value":"AND", "right":null , "left":['+$$[$0-2]+','+$$[$0]+'] }'
+case 6: this.$ =  '{"value":"AND", "right":'+$$[$0]+' , "left":'+$$[$0-2]+' }'
 break;
-case 7: this.$ = '{"value":"SE", "right":['+$$[$0]+'] , "left":['+$$[$0-2]+'] }'
+case 7: this.$ = '{"value":"SE", "right":'+$$[$0]+' , "left":'+$$[$0-2]+' }'
 break;
-case 8: this.$ =   '{"value":"SSS", "right":['+$$[$0-2]+','+$$[$0]+'] , "left":['+$$[$0-2]+','+$$[$0]+'] }'
+case 8: this.$ =   '{"value":"SSS", "right":'+$$[$0]+' , "left":'+$$[$0-2]+' }'
 break;
 case 9: this.$ = '{"value":"NOT", "left":'+$$[$0]+'}'
 break;

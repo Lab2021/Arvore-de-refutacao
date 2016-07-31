@@ -49,10 +49,10 @@ premises:
          ;
 
 expr:
-           expr OU expr       { $$ =  '{"value":"OU", "right":['+$3+'] , "left":['+$1+'] }' }
-         | expr E  expr       { $$ =  '{"value":"AND", "right":null , "left":['+$1+','+$3+'] }' }
-         | expr SE  expr      { $$ = '{"value":"SE", "right":['+$3+'] , "left":['+$1+'] }' }
-         | expr SSS expr      { $$ =   '{"value":"SSS", "right":['+$1+','+$3+'] , "left":['+$1+','+$3+'] }'}
+           expr OU expr       { $$ =  '{"value":"OU", "right":'+$3+' , "left":'+$1+' }' }
+         | expr E  expr       { $$ =  '{"value":"AND", "right":'+$3+' , "left":'+$1+' }' }
+         | expr SE  expr      { $$ = '{"value":"SE", "right":'+$3+' , "left":'+$1+' }' }
+         | expr SSS expr      { $$ =   '{"value":"SSS", "right":'+$3+' , "left":'+$1+' }'}
          | NAO expr { $$ = '{"value":"NOT", "left":'+$2+'}'  }
          | LPAREN expr RPAREN { $$ =  $2; }
          | VAR                { $$ =  '{"value":"ELE", "left":"'+$1+'"}' }
