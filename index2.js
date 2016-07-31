@@ -1,43 +1,3 @@
-// myparser.js
-
-//
-// Node = function(val){
-//   this.value = val;
-//   this.left = null;
-//   this.right = null;
-// }
-//
-// function inleft(value,parent){
-//    if(parent == null){
-//          return new Node(value);
-//    }else if(parent.left != null){
-//       inleft(value,parent.left);
-//    }   else{
-//          return parent.left = inleft(value,parent.left);
-//    }
-// }
-//
-// function inright(value,parent){
-//    if(parent == null){
-//          return new Node(value);
-//    }else if(parent.right != null){
-//       inright(value,parent.right);
-//    }   else{
-//          return parent.right = inright(value,parent.right);
-//    }
-// }
-//
-//
-// function findelements(x){
-//    return x.value == "ELE"
-// }
-//
-//
-// fand = function(valor,lista){
-// lista.push()
-// }
-
-
 verificaexp = function(x){
    console.log("Valor de x:");
    console.log(x);
@@ -79,7 +39,7 @@ verificaexp = function(x){
             cont--;
          }
       }else if(x.value == "NOT"){
-         //NOT
+         //NOT Precisa fazer todas as combinações do caso acima com o NOT
          if(x.left.value == "ELE"){
             console.log("ADD NOTELE")
               lista.push('~'+x.left.left);
@@ -111,7 +71,7 @@ verificaexp = function(x){
                 cont--;
              }
           }else if (x.left.value == "NOT"){
-             console.log("EU AQUI ")
+             console.log("NOT NOT")
              verificaexp(x.left.left);
           }
       }else{
@@ -120,9 +80,9 @@ verificaexp = function(x){
                console.log("ADD VET")
                verificaexp(y)
             }}
-         console.log("Wtf??")
-         console.log(x);
-         console.log(x.value)
+         //console.log("Wtf??")
+         //console.log(x);
+         //console.log(x.value)
       }
 
       console.log(lista);
