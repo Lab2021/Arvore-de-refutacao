@@ -39,6 +39,6 @@ Verdadeiro
 
 ## License
 
-[MIT][LICENSE.md]	
+[MIT](LICENSE.md)	
 
 **Seja livre**
