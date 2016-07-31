@@ -30,12 +30,13 @@ verificaexp = function(x){
             cont--;
          }
       }else if(x.value == "SSS"){
+         console.log("SSS")
          if(!x.hasOwnProperty('flag')){
-         x.flag = 1;
-         verificaexp(x.left);
+            x.flag = 1;
+            verificaexp([x.left,x.right]);
             cont++;
          }else{
-            verificaexp([{value:"NOT", left:x.right[0]},{value:"NOT", left:x.right[1]}]);
+            verificaexp([{value:"NOT", left:x.left},{value:"NOT", left:x.right}]);
             cont--;
          }
       }else if(x.value == "NOT"){
@@ -62,12 +63,13 @@ verificaexp = function(x){
               verificaexp(x.left.left);
               verificaexp({value:"NOT", left:x.left.right});
            }else if(x.left.value == "SSS"){
+              console.log("NSSS")
              if(!x.hasOwnProperty('flag')){
              x.flag = 1;
-             verificaexp([x.left.right[0],{value:"NOT", left:x.left.right[1]}]);
+             verificaexp([x.left.left,{value:"NOT", left:x.left.right}]);
                 cont++;
              }else{
-                verificaexp([{value:"NOT", left:x.left.right[0]},x.left.right[1]]);
+                verificaexp([{value:"NOT", left:x.left.left},x.left.right]);
                 cont--;
              }
           }else if (x.left.value == "NOT"){
@@ -93,67 +95,68 @@ verificaexp = function(x){
 
 
 
-//Função para aplicar o Parser na Entrada
-function exec (input) {
-    return parser.parse(input.replace('~~',''));
-}
+
+
 
 function arvore() {
 //Pega a entrada do usuário, faz alguns tratamentos e manda para o parser
-try {
-   document.getElementById("saida").style.color = "black";
-    input = exec(document.getElementById('entrada').value);
+erro = false;
+document.getElementById("saida").style.color = "black";
+document.getElementById('saida').innerHTML = '';
+try{
+input = parser.parse(document.getElementById('entrada').value.replace('~~',''));//Função para aplicar o Parser na Entrada
+}catch(err){
+   erro = err;
 }
-catch(err) {
-    document.getElementById("saida").innerHTML = err.message;
-    document.getElementById("saida").style.color = "red";
-}
+if(!erro){
+   console.log("input:"); // Todos os consoles logs aparecem no console do browser acompanhar o processo
+   console.log(input);
+   console.log("=====");
+   vet = input.split(':-');
+   p = vet[0]; // Vetor das premissas
+   c = '{"value":"NOT", "left":'+vet[1]+'}'; // Vetor da conclusão
+   cont = 0;
+   console.log(c);
 
-console.log("input:"); // Todos os consoles logs aparecem no console do browser acompanhar o processo
-console.log(input);
-console.log("=====");
-vet = input.split(':-');
-//root = Node("inicio");
-
-
-p = vet[0]; // Vetor das premissas
-c = '{"value":"NOT", "left":'+vet[1]+'}'; // Vetor da conclusão
-cont = 0;
-console.log(c);
-
-// Essa função cria um vetor e aloca todos os termos nele
-//onde é feito a verificação de validação de cada ramo.
-//Caso seja verdadeiro ele passa para o proximo ramo, caso falso ele encerra e
-//exibe falso ao usuário.
- (function provador(x,y){
-      x = JSON.parse("["+x+"]");
-      y = JSON.parse("["+y+"]");
-      console.log("Tamanho x:"+ x.length);
-      console.log("Tamanho y:"+ y.length);
-      console.log("=====");
-      prova = true;
-      loop1:
-      while (true) {
-         p = false;
-         lista = [];
-         verificaexp(y);
-         verificaexp(x);
-         for(var i=0;i<lista.length;i++){
-            for(var j=i;j<lista.length;j++){
-               if("~"+lista[i] == lista[j] || lista[i] == "~"+lista[j]){
-                  console.log(lista[i])
-                  console.log(lista[j])
-                  p = true
+   // Essa função cria um vetor e aloca todos os termos nele
+   //onde é feito a verificação de validação de cada ramo.
+   //Caso seja verdadeiro ele passa para o proximo ramo, caso falso ele encerra e
+   //exibe falso ao usuário.
+    (function provador(x,y){
+         x = JSON.parse("["+x+"]");
+         y = JSON.parse("["+y+"]");
+         console.log("Tamanho x:"+ x.length);
+         console.log("Tamanho y:"+ y.length);
+         console.log("=====");
+         prova = true;
+         loop1:
+         while (true) {
+            p = false;
+            lista = [];
+            verificaexp(y);
+            verificaexp(x);
+            for(var i=0;i<lista.length;i++){
+               for(var j=i;j<lista.length;j++){
+                  if("~"+lista[i] == lista[j] || lista[i] == "~"+lista[j]){
+                     console.log(lista[i])
+                     console.log(lista[j])
+                     p = true
+                  }
                }
             }
+               if(!p || cont==0)break loop1;
          }
-            if(!p || cont==0)break loop1;
-      }
-      console.log(p?"Verdade":"Falso");
- })(p,c); // Chama a função "provador" com a premissa e conclusão
+         console.log(p?"Verdade":"Falso");
+    })(p,c); // Chama a função "provador" com a premissa e conclusão
 
-console.log(cont);
-//Mostra Saída
-//document.getElementById('demo').innerHTML = input; // Arvore gerada pelo parser
-document.getElementById('saida').innerHTML = p?"Verdade":"Falso"; // Saida para o usuário
+   console.log(cont);
+   //Mostra Saída
+   //document.getElementById('demo').innerHTML = input; // Arvore gerada pelo parser
+   document.getElementById('saida').innerHTML = p?"Verdade":"Falso"; // Saida para o usuário
+}else{
+   //Gera erro na tela
+   document.getElementById("saida").innerHTML = erro;
+   document.getElementById("saida").style.color = "red";
+
+}
 }

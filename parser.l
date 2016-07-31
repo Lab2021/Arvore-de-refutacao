@@ -7,7 +7,6 @@
 %%
 
 \s*\n\s*  {/* ignore */}
-
 "("       { return 'LPAREN'; }
 ")"       { return 'RPAREN'; }
 ":-"|":"   { return 'CONCLUSAO'; }
@@ -19,7 +18,7 @@
 "<->"|"<>"   { return 'SSS'; }
 ","    { return 'VIRGULA'; }
 [a-zA-Z]  { return 'VAR'; }
-/*\s+       { return 'SEP'; }*/
+\s+       { /* ignore */}
 <<EOF>>   { return 'EOF'; }
 /lex
 
