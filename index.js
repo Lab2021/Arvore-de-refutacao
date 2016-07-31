@@ -144,7 +144,7 @@ if(!erro){
                   }
                }
             }
-               if(!p || cont==0)break loop1;
+               if(!p || cont<=0)break loop1;
          }
          console.log(p?"Verdade":"Falso");
     })(p,c); // Chama a função "provador" com a premissa e conclusão
