@@ -1,16 +1,52 @@
 <html>
 
+<head>
+    <style>
+        input[type='text'] {
+            font-size: 72px;
+        }
+
+        p,
+        input,
+        button,
+        select,
+        option,
+        textarea {
+            font-size: 54px;
+        }
+
+        #footer {
+            width: 100%;
+            bottom: 0;
+            position: absolute;
+        }
+    </style>
+</head>
+
 <body>
-    <input type="text" id="entrada" name="entrada"></input>
-    <button type="button" onclick="arvore()">Click </button>
-    <p id="demo"></p>
-    <p id="saida"></p>
-    <script src="index2.js">
+    <div align="center">
+        <h1>UFRB - Universidade Federal do Recôncavo da Bahia </h1>
+        <br>
+        <h1>Projeto feito para disciplina CET519 - Lógica para Computação<h1>
+        <input type="text" id="entrada" name="entrada"></input>
+        <br>
+        <button type="button" onclick="arvore()">Click </button>
+        <p id="demo"></p>
+        <p id="saida"></p>
+
+    </div>
+    <div id="footer" align="center">
+      <h7>Made with C<sub>8</sub>H<sub>10</sub>N<sub>4</sub>O<sub>2</sub> + ♥ by: <a href="https://github.com/joshuapassos/Arvore-de-refutacao">Joshua Passos</a></h7>
+   </div>
+    <script src="index.js">
     </script>
 
     <script src="parser.js">
     </script>
 
+</body>
+
+</html>
 </body>
 
 </html>
