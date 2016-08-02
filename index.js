@@ -1,3 +1,4 @@
+//Essa função trata cada caso: AND, OR, NAND, NOR, SSS, NSSS, NSE, NSE ou caso venha novos elementos. 
 verificaexp = function(x){
    console.log("Valor de x:");
    console.log(x);
