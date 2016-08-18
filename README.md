@@ -23,11 +23,11 @@ Beta
 
 ## Bugs
 
-[Reporte aqui os possiveis Bugs](https://github.com/joshuapassos/Arvore-de-refutacao/issues)
+[Reporte aqui os possiveis Bugs](https://github.com/Lab2021/Arvore-de-refutacao/issues)
 
 ### Como Usar
 
-Entre nesse [link](https://rawgit.com/joshuapassos/Arvore-de-refutacao/origin/index.html) para testar o programa.
+Entre nesse [link](https://rawgit.com/Lab2021/Arvore-de-refutacao/origin/index.html) para testar o programa.
 
 Ex Entrada:
 
